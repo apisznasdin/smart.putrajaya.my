@@ -1,0 +1,260 @@
+---
+layout: default
+---
+
+<!-- Page Header -->
+<header class="page-header project-header" style="background: linear-gradient(135deg, {{ page.color_start | default: '#0A2647' }} 0%, {{ page.color_end | default: '#205295' }} 100%);">
+    <div class="container">
+        <div class="page-header-content">
+            <nav class="breadcrumb-nav mb-3" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ '/' | relative_url }}"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ '/projects/' | relative_url }}">Projects</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ page.short_title | default: page.title }}</li>
+                </ol>
+            </nav>
+            
+            <div class="project-header-icon mb-3">
+                <i class="{{ page.icon | default: 'fas fa-project-diagram' }}"></i>
+            </div>
+            
+            <h1 class="page-title">{{ page.title }}</h1>
+            
+            {% if page.tagline %}
+            <p class="page-subtitle">{{ page.tagline }}</p>
+            {% endif %}
+            
+            <!-- Domain Tags -->
+            <div class="project-tags mt-4">
+                {% for domain in page.domains %}
+                <span class="project-tag domain-tag">
+                    <i class="fas fa-cube me-1"></i> {{ domain }}
+                </span>
+                {% endfor %}
+                
+                <span class="project-tag status-tag {% if page.status == 'Active' %}active{% elsif page.status == 'Pilot' %}pilot{% else %}planned{% endif %}">
+                    <i class="fas fa-circle me-1"></i> {{ page.status | default: 'Active' }}
+                </span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Project Content -->
+<section class="section project-detail-section">
+    <div class="container">
+        <div class="row g-5">
+            <!-- Main Content -->
+            <div class="col-lg-8">
+                <div class="project-content-card">
+                    {{ content }}
+                </div>
+                
+                <!-- Key Features -->
+                {% if page.features %}
+                <div class="project-content-card mt-4">
+                    <h3 class="content-section-title">
+                        <i class="fas fa-check-circle text-accent me-2"></i>Key Features
+                    </h3>
+                    <div class="features-grid">
+                        {% for feature in page.features %}
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span>{{ feature }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- Gallery -->
+                {% if page.gallery %}
+                <div class="project-content-card mt-4">
+                    <h3 class="content-section-title">
+                        <i class="fas fa-images text-accent me-2"></i>Gallery
+                    </h3>
+                    <div class="project-gallery">
+                        {% for image in page.gallery %}
+                        <div class="gallery-item">
+                            <img src="{{ image.url | relative_url }}" alt="{{ image.caption }}">
+                            {% if image.caption %}
+                            <p class="gallery-caption">{{ image.caption }}</p>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Project Info Card -->
+                <div class="project-info-card">
+                    <h4 class="info-card-title">Project Information</h4>
+                    
+                    <div class="info-item">
+                        <span class="info-label"><i class="fas fa-info-circle me-2"></i>Status</span>
+                        <span class="info-value status-badge {% if page.status == 'Active' %}active{% elsif page.status == 'Pilot' %}pilot{% else %}planned{% endif %}">
+                            {{ page.status | default: 'Active' }}
+                        </span>
+                    </div>
+                    
+                    {% if page.launch_date %}
+                    <div class="info-item">
+                        <span class="info-label"><i class="fas fa-calendar-alt me-2"></i>Launch Date</span>
+                        <span class="info-value">{{ page.launch_date }}</span>
+                    </div>
+                    {% endif %}
+                    
+                    {% if page.location %}
+                    <div class="info-item">
+                        <span class="info-label"><i class="fas fa-map-marker-alt me-2"></i>Location</span>
+                        <span class="info-value">{{ page.location }}</span>
+                    </div>
+                    {% endif %}
+                    
+                    {% if page.operator %}
+                    <div class="info-item">
+                        <span class="info-label"><i class="fas fa-building me-2"></i>Operator</span>
+                        <span class="info-value">{{ page.operator }}</span>
+                    </div>
+                    {% endif %}
+                    
+                    {% if page.external_url %}
+                    <div class="info-item">
+                        <a href="{{ page.external_url }}" target="_blank" rel="noopener" class="btn-project-link">
+                            <i class="fas fa-external-link-alt me-2"></i>Visit Portal
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <!-- SDG Card -->
+                {% if page.sdgs %}
+                <div class="sdg-card mt-4">
+                    <h4 class="info-card-title">
+                        <img src="{{ '/assets/images/sdg-wheel.png' | relative_url }}" alt="SDG" class="sdg-wheel-icon">
+                        UN Sustainable Development Goals
+                    </h4>
+                    <p class="sdg-intro">This project contributes to the following SDGs:</p>
+                    <div class="sdg-grid">
+                        {% for sdg in page.sdgs %}
+                        <div class="sdg-item" data-sdg="{{ sdg.number }}">
+                            {% if sdg.number < 10 %}
+                            <img src="{{ '/assets/images/sdg/sdg-0' | append: sdg.number | append: '.png' | relative_url }}" alt="SDG {{ sdg.number }}" class="sdg-icon">
+                            {% else %}
+                            <img src="{{ '/assets/images/sdg/sdg-' | append: sdg.number | append: '.png' | relative_url }}" alt="SDG {{ sdg.number }}" class="sdg-icon">
+                            {% endif %}
+                            <div class="sdg-info">
+                                <span class="sdg-number">SDG {{ sdg.number }}</span>
+                                <span class="sdg-title">{{ sdg.title }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- MS ISO 37122 Indicators Card -->
+                {% if page.iso_indicators %}
+                <div class="iso-card mt-4">
+                    <h4 class="info-card-title">
+                        <i class="fas fa-certificate me-2"></i>MS ISO 37122:2019 Indicators
+                    </h4>
+                    <p class="iso-intro">Related smart city indicators:</p>
+                    <div class="iso-indicator-list">
+                        {% for indicator in page.iso_indicators %}
+                        <div class="iso-indicator-item">
+                            <span class="iso-code">{{ indicator.code }}</span>
+                            <span class="iso-name">{{ indicator.name }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <a href="{{ '/ms-iso37122/' | relative_url }}" class="iso-learn-more">
+                        <i class="fas fa-external-link-alt me-1"></i>View All Indicators
+                    </a>
+                </div>
+                {% endif %}
+                
+                <!-- Domains Card -->
+                <div class="domains-card mt-4">
+                    <h4 class="info-card-title">
+                        <i class="fas fa-layer-group me-2"></i>Smart Domains
+                    </h4>
+                    <div class="domain-list">
+                        {% for domain in page.domains %}
+                        <a href="{{ '/projects/' | relative_url }}#{{ domain | slugify }}" class="domain-chip">
+                            {% if domain == "Smart Transportation" %}
+                            <i class="fas fa-bus"></i>
+                            {% elsif domain == "Home & Environment" %}
+                            <i class="fas fa-leaf"></i>
+                            {% elsif domain == "Government Services" %}
+                            <i class="fas fa-landmark"></i>
+                            {% elsif domain == "Infrastructure & Utilities" %}
+                            <i class="fas fa-network-wired"></i>
+                            {% elsif domain == "Safety & Security" %}
+                            <i class="fas fa-shield-alt"></i>
+                            {% elsif domain == "Smart Economy" %}
+                            <i class="fas fa-chart-line"></i>
+                            {% elsif domain == "Smart Community" %}
+                            <i class="fas fa-users"></i>
+                            {% else %}
+                            <i class="fas fa-cube"></i>
+                            {% endif %}
+                            {{ domain }}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <!-- Contact Card -->
+                <div class="contact-card mt-4">
+                    <h4 class="info-card-title">
+                        <i class="fas fa-envelope me-2"></i>Enquiries
+                    </h4>
+                    <p>For more information about this project:</p>
+                    <a href="mailto:smart@putrajaya.my" class="btn-contact">
+                        <i class="fas fa-paper-plane me-2"></i>Contact Smart City Team
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Related Projects -->
+<section class="section section-light">
+    <div class="container">
+        <h3 class="text-center mb-4" style="color: var(--color-primary);">
+            <i class="fas fa-project-diagram me-2"></i>Other Projects
+        </h3>
+        <div class="row g-4 justify-content-center">
+            {% assign other_projects = site.projects | where_exp: "project", "project.url != page.url" | limit: 3 %}
+            {% for project in other_projects %}
+            <div class="col-md-4">
+                <div class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, {{ project.color_start | default: '#0A2647' }} 0%, {{ project.color_end | default: '#205295' }} 100%);">
+                        <i class="{{ project.icon | default: 'fas fa-project-diagram' }} project-icon"></i>
+                        <span class="project-status {% if project.status == 'Active' %}active{% elsif project.status == 'Pilot' %}pilot{% else %}planned{% endif %}">{{ project.status }}</span>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">{{ project.short_title | default: project.title }}</h3>
+                        <p class="project-description">{{ project.excerpt | strip_html | truncate: 80 }}</p>
+                        <a href="{{ project.url | relative_url }}" class="project-link">
+                            Learn More <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{{ '/projects/' | relative_url }}" class="btn-hero-secondary" style="color: var(--color-primary); border-color: var(--color-primary);">
+                <i class="fas fa-th-large me-2"></i>View All Projects
+            </a>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,60 @@
+# Site Settings
+title: "Putrajaya Smart City"
+description: "Smart Urban Living for Sustainability & A Higher Quality of Life"
+tagline: "Smart Urban Living"
+baseurl: ""
+url: "https://smart.putrajaya.my"
+
+# Contact Information
+contact:
+  address: |
+    Seksyen Smart City, Bahagian Teknologi Maklumat & Komunikasi,
+    Perbadanan Putrajaya, 24 Persiaran Perdana,
+    62675 W.P. Putrajaya, Malaysia.
+  phone: "+603 8887 7000"
+  email: "smart@putrajaya.my"
+
+# Social Links
+social:
+  facebook: "https://www.facebook.com/paboranputrajaya"
+  x: "https://x.com/ppaboranputrajaya"
+  instagram: "https://www.instagram.com/paboranputrajaya"
+  tiktok: "https://tiktok.com/@perbadananputrajaya"
+  youtube: "https://www.youtube.com/c/perbadananputrajaya/"
+  linkedin: "https://www.linkedin.com/company/perbadanan-putrajaya/"
+  threads: "https://www.threads.com/@perbadananputrajaya"
+
+# Build Settings
+markdown: kramdown
+permalink: /news/:year/:month/:day/:title/
+
+# Collections
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+    sort_by: title
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE
+
+# Environment Settings
+environment: development
+# environment: production

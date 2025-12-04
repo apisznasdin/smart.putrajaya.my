@@ -1,0 +1,16 @@
+---
+layout: null
+permalink: /robots.txt
+---
+{% if jekyll.environment == 'production' %}
+# Production: Allow crawling and point to Sitemap
+User-agent: *
+Allow: /
+Sitemap: {{ site.url }}/sitemap.xml
+
+{% else %}
+# Development (or any other env): Block EVERYTHING
+User-agent: *
+Disallow: /
+
+{% endif %}
