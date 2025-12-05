@@ -45,24 +45,49 @@ Official website for Smart Putrajaya initiative by Perbadanan Putrajaya, showcas
 
 ```
 smart-putrajaya/
-├── _config.yml          # Jekyll configuration
+├── _config.yml              # Jekyll configuration
 ├── _layouts/
-│   ├── default.html     # Main layout (navbar + footer)
-│   └── post.html        # Blog post layout
-├── _posts/              # News articles (Jekyll blog)
+│   ├── default.html         # Main layout (navbar + footer)
+│   ├── post.html            # Blog post layout
+│   └── project.html         # Project detail layout
+├── _projects/               # Smart city project collection
+├── _posts/                  # News articles (Jekyll blog)
 ├── assets/
 │   ├── css/
-│   │   └── styles.css   # Custom styles
+│   │   ├── styles.css       # Main entry (imports modules)
+│   │   ├── base.css         # Variables, themes, utilities
+│   │   ├── components.css   # Navigation, cards, buttons
+│   │   ├── sections.css     # Hero, stats, footer
+│   │   └── pages.css        # Page-specific styles
 │   ├── js/
-│   │   └── main.js      # JavaScript functionality
-│   ├── docs/            # Downloadable documents
-│   └── images/          # Image assets
-├── index.html           # Homepage
-├── projects.md          # Projects page
-├── news.md              # News listing page
-├── Gemfile              # Ruby dependencies
-└── README.md            # This file
+│   │   └── main.js          # JavaScript functionality
+│   ├── docs/                # Downloadable documents
+│   └── images/              # Image assets
+├── index.html               # Homepage
+├── projects.md              # Projects listing page
+├── domains.md               # 7 Smart Domains page
+├── sdg.md                   # SDG alignment page
+├── ms-iso37122.md           # ISO 37122 Standards page
+├── news.md                  # News listing page
+├── contact.md               # Contact page
+├── 404.html                 # Custom 404 page
+├── Gemfile                  # Ruby dependencies
+└── README.md                # This file
 ```
+
+---
+
+## ✨ Features
+
+| Feature | Description |
+|---------|-------------|
+| 🌙 **Dark Mode** | WCAG AA compliant light/dark theme toggle |
+| 🔍 **Client-side Search** | Fast search across all content |
+| 📱 **Responsive Design** | Mobile-first, works on all devices |
+| ⚡ **Performance** | CSS/JS minification via jekyll-minifier |
+| 🎯 **SEO Optimized** | Meta tags, sitemaps, structured data |
+| ♿ **Accessible** | Skip links, focus states, reduced motion |
+| 📊 **Analytics** | Google Analytics (configurable) |
 
 ---
 
@@ -71,8 +96,12 @@ smart-putrajaya/
 | Page | File | Description |
 |------|------|-------------|
 | Home | `index.html` | Hero section, 7 domains, featured projects |
-| Projects | `projects.md` | All 7 smart city initiatives |
+| Projects | `projects.md` | All smart city initiatives |
+| Domains | `domains.md` | 7 Smart Domains with details |
+| SDG | `sdg.md` | UN SDG alignment mapping |
+| MS ISO 37122 | `ms-iso37122.md` | Smart city standards & indicators |
 | News | `news.md` | Blog-style news listing |
+| Contact | `contact.md` | Contact information & form |
 
 ---
 
@@ -88,51 +117,61 @@ smart-putrajaya/
 
 ---
 
-## 🌍 Required Assets - SDG Icons
+## � CSS Architecture
 
-Before deployment, you must add the UN SDG icons:
+The CSS is organized into modular files for maintainability:
 
-### SDG Goal Icons
-Download from: https://www.un.org/sustainabledevelopment/news/communications-material/
+| File | Purpose |
+|------|---------|
+| `base.css` | CSS variables, theming (light/dark), resets, utilities |
+| `components.css` | Navigation, cards, buttons, forms, badges |
+| `sections.css` | Hero, statistics, CTA, footer, page headers |
+| `pages.css` | Page-specific styles (ISO, SDG, domains, contact) |
+| `styles.css` | Main entry point, imports modules, additional styles |
 
-Place in `/assets/images/sdg/`:
-- `sdg-01.jpg` through `sdg-17.jpg`
+### Theme Variables
 
-### SDG Wheel & Logo
-Place in `/assets/images/`:
-- `sdg-wheel.png` (color wheel)
-- `sdg-logo.png` (horizontal logo)
+The site uses CSS custom properties for theming:
 
-See `/assets/images/sdg/README.md` for details.
+```css
+:root {
+    --bg-body: #FFFFFF;
+    --text-primary: #0F172A;
+    --brand-accent: #00A8A8;
+    /* ... */
+}
 
----
-
-## 🌐 Hosting
-
-The site is configured for hosting at `https://smart.putrajaya.my`. 
-
-To change the URL, update `_config.yml`:
-```yaml
-url: "https://your-domain.com"
+[data-theme="dark"] {
+    --bg-body: #0F172A;
+    --text-primary: #F1F5F9;
+    /* ... */
+}
 ```
 
 ---
 
-## 📋 Featured Projects
+## � Plugins
 
-| Project | Description | Link |
-|---------|-------------|------|
-| Putrajaya Command Centre (PCC) | Centralized monitoring hub | - |
-| Smart CCTV & Panic Button | AI surveillance + emergency buttons | - |
-| Putrajaya Urban Observatory (PUO) | Urban analytics platform | [puo.ppj.gov.my](https://puo.ppj.gov.my/) |
-| IEMS | Environment monitoring system | [iems.ppj.gov.my](https://iems.ppj.gov.my/) |
-| CEBB | Digital signage network | - |
-| Micro Mobility by Tryke | E-scooter sharing service | - |
-| MyAV Pilot | Autonomous vehicle testing | - |
+| Plugin | Purpose |
+|--------|---------|
+| `jekyll-feed` | RSS feed generation |
+| `jekyll-seo-tag` | SEO meta tags |
+| `jekyll-sitemap` | XML sitemap |
+| `jekyll-minifier` | CSS/JS/HTML compression |
 
 ---
 
-## 🛠️ Customization
+## ⚙️ Configuration
+
+### Google Analytics
+
+Analytics is configured in `_config.yml`:
+
+```yaml
+google_analytics: "G-XXXXXXXXXX"
+```
+
+The tracking code is conditionally included only when `google_analytics` is set.
 
 ### Adding News Posts
 
@@ -154,22 +193,43 @@ excerpt: Brief description of the post.
 ---
 ```
 
-### Updating Contact Information
+### Adding Projects
 
-Edit the `_config.yml` file:
+Create a new file in `_projects/` with:
 ```yaml
-contact:
-  address: "Your Address"
-  phone: "+60 XX XXXX XXXX"
-  email: "your@email.com"
+---
+layout: project
+title: "Project Name"
+short_title: "Short Name"
+excerpt: "Brief description"
+icon: "fas fa-icon-name"
+color_start: "#3B82F6"
+color_end: "#1D4ED8"
+status: "Active"
+domains:
+  - "Smart Transportation & Mobility"
+sdgs:
+  - number: 11
+    name: "Sustainable Cities"
+---
 ```
 
-### Adding the Blueprint PDF
+---
 
-Place your PDF file at:
-```
-assets/docs/smart-putrajaya-blueprint.pdf
-```
+## 🌍 Required Assets
+
+### SDG Icons
+
+Download from: https://www.un.org/sustainabledevelopment/news/communications-material/
+
+Place in `/assets/images/sdg/`:
+- `sdg-01.png` through `sdg-17.png`
+
+### SDG Wheel & Logo
+
+Place in `/assets/images/`:
+- `sdg-wheel.png` (color wheel)
+- `sdg-logo.png` (horizontal logo)
 
 ---
 
@@ -200,6 +260,31 @@ assets/docs/smart-putrajaya-blueprint.pdf
 | md | ≥768px | Tablet |
 | lg | ≥992px | Laptop |
 | xl | ≥1200px | Desktop |
+
+---
+
+## 📋 Featured Projects
+
+| Project | Description | Link |
+|---------|-------------|------|
+| Putrajaya Command Centre (PCC) | Centralized monitoring hub | - |
+| Smart CCTV & Panic Button | AI surveillance + emergency buttons | - |
+| Putrajaya Urban Observatory (PUO) | Urban analytics platform | [puo.ppj.gov.my](https://puo.ppj.gov.my/) |
+| IEMS | Environment monitoring system | [iems.ppj.gov.my](https://iems.ppj.gov.my/) |
+| CEBB | Digital signage network | - |
+| Micro Mobility by Tryke | E-scooter sharing service | - |
+| MyAV Pilot | Autonomous vehicle testing | - |
+
+---
+
+## 🌐 Hosting
+
+The site is configured for hosting at `https://smart.putrajaya.my`. 
+
+To change the URL, update `_config.yml`:
+```yaml
+url: "https://your-domain.com"
+```
 
 ---
 

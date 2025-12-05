@@ -6,6 +6,144 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     // ==========================================
+    // Dark Mode Toggle
+    // ==========================================
+    const themeToggle = document.getElementById('themeToggle');
+    const htmlElement = document.documentElement;
+    
+    // Check for saved theme preference or system preference
+    function getPreferredTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            return savedTheme;
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    
+    // Apply theme
+    function setTheme(theme) {
+        htmlElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        
+        // Update toggle icon
+        const icon = themeToggle.querySelector('i');
+        if (icon) {
+            icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+    }
+    
+    // Initialize theme
+    setTheme(getPreferredTheme());
+    
+    // Toggle theme on button click
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+    }
+    
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+            setTheme(e.matches ? 'dark' : 'light');
+        }
+    });
+    
+    // ==========================================
+    // Search Functionality
+    // ==========================================
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    const searchModal = document.getElementById('searchModal');
+    let searchData = [];
+    
+    // Load search data
+    async function loadSearchData() {
+        try {
+            const response = await fetch('/search.json');
+            searchData = await response.json();
+        } catch (error) {
+            console.log('Search data not available');
+        }
+    }
+    
+    // Perform search
+    function performSearch(query) {
+        if (!query || query.length < 2) {
+            searchResults.innerHTML = '';
+            return;
+        }
+        
+        const lowerQuery = query.toLowerCase();
+        const results = searchData.filter(item => {
+            return item.title.toLowerCase().includes(lowerQuery) ||
+                   (item.content && item.content.toLowerCase().includes(lowerQuery)) ||
+                   (item.category && item.category.toLowerCase().includes(lowerQuery));
+        }).slice(0, 10);
+        
+        if (results.length === 0) {
+            searchResults.innerHTML = `
+                <div class="search-no-results">
+                    <i class="fas fa-search"></i>
+                    <p>No results found for "<strong>${query}</strong>"</p>
+                    <p class="small text-muted">Try different keywords or browse our pages</p>
+                </div>
+            `;
+            return;
+        }
+        
+        searchResults.innerHTML = results.map(item => `
+            <a href="${item.url}" class="search-result-item">
+                <span class="search-result-category">${item.category}</span>
+                <div class="search-result-title">${highlightMatch(item.title, query)}</div>
+                ${item.content ? `<div class="search-result-excerpt">${highlightMatch(item.content.substring(0, 100), query)}...</div>` : ''}
+            </a>
+        `).join('');
+    }
+    
+    // Highlight matching text
+    function highlightMatch(text, query) {
+        const regex = new RegExp(`(${query})`, 'gi');
+        return text.replace(regex, '<mark>$1</mark>');
+    }
+    
+    // Search event listeners
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            performSearch(e.target.value);
+        });
+        
+        // Focus search input when modal opens
+        if (searchModal) {
+            searchModal.addEventListener('shown.bs.modal', () => {
+                searchInput.focus();
+            });
+            
+            // Clear search when modal closes
+            searchModal.addEventListener('hidden.bs.modal', () => {
+                searchInput.value = '';
+                searchResults.innerHTML = '';
+            });
+        }
+    }
+    
+    // Keyboard shortcut for search (Ctrl/Cmd + K)
+    document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            if (searchModal) {
+                const modal = new bootstrap.Modal(searchModal);
+                modal.show();
+            }
+        }
+    });
+    
+    // Load search data on page load
+    loadSearchData();
+    
+    // ==========================================
     // Navbar Scroll Effect
     // ==========================================
     const navbar = document.querySelector('.navbar');
@@ -141,31 +279,53 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // ==========================================
-    // Form Validation (Newsletter)
+    // Form Handling (Newsletter & Contact)
     // ==========================================
-    const forms = document.querySelectorAll('form');
-    forms.forEach(form => {
-        form.addEventListener('submit', function(e) {
+    const newsletterForm = document.getElementById('newsletterForm');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const emailInput = this.querySelector('input[type="email"]');
             if (emailInput && emailInput.value) {
-                // Show success message
                 const btn = this.querySelector('button[type="submit"]');
-                const originalText = btn.innerHTML;
-                btn.innerHTML = '<i class="fas fa-check"></i> Subscribed!';
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i>';
                 btn.style.background = 'linear-gradient(135deg, #10B981 0%, #059669 100%)';
                 
                 setTimeout(() => {
-                    btn.innerHTML = originalText;
+                    btn.innerHTML = originalHTML;
                     btn.style.background = '';
                     emailInput.value = '';
                 }, 3000);
             }
         });
-    });
+    }
+    
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show success message
+            const formCard = this.closest('.contact-form-card');
+            const successMessage = document.getElementById('formSuccess');
+            
+            if (formCard && successMessage) {
+                this.style.display = 'none';
+                successMessage.style.display = 'block';
+                
+                // Reset after 5 seconds
+                setTimeout(() => {
+                    this.reset();
+                    this.style.display = 'block';
+                    successMessage.style.display = 'none';
+                }, 5000);
+            }
+        });
+    }
     
     // ==========================================
-    // Back to Top Button (Optional)
+    // Back to Top Button
     // ==========================================
     const backToTop = document.createElement('button');
     backToTop.innerHTML = '<i class="fas fa-chevron-up"></i>';
@@ -201,6 +361,10 @@ document.addEventListener('DOMContentLoaded', function() {
             opacity: 1;
             visibility: visible;
         }
+        [data-theme="dark"] .back-to-top {
+            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+            box-shadow: 0 4px 15px rgba(0, 168, 168, 0.3);
+        }
     `;
     document.head.appendChild(backToTopStyles);
     
@@ -221,3 +385,4 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('Smart Putrajaya website initialized successfully.');
 });
+

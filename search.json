@@ -1,0 +1,97 @@
+---
+layout: null
+---
+[
+  {% for project in site.projects %}
+  {
+    "title": {{ project.title | jsonify }},
+    "url": {{ project.url | relative_url | jsonify }},
+    "content": {{ project.content | strip_html | truncatewords: 50 | jsonify }},
+    "category": "Projects",
+    "date": {{ project.date | default: "2024-01-01" | date: "%Y-%m-%d" | jsonify }},
+    "status": {{ project.status | default: "Active" | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+  {% if site.projects.size > 0 and site.posts.size > 0 %},{% endif %}
+  {% for post in site.posts %}
+  {
+    "title": {{ post.title | jsonify }},
+    "url": {{ post.url | relative_url | jsonify }},
+    "content": {{ post.content | strip_html | truncatewords: 50 | jsonify }},
+    "category": "News",
+    "date": {{ post.date | date: "%Y-%m-%d" | jsonify }},
+    "source": {{ post.source | default: "News" | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+  {% if site.posts.size > 0 %},{% endif %}
+  {
+    "title": "Smart Transportation & Mobility",
+    "url": "/domains/#smart-transportation",
+    "content": "Integrated mobility solutions including autonomous vehicles, micro-mobility services, and intelligent traffic management.",
+    "category": "Domains",
+    "date": "2024-01-01"
+  },
+  {
+    "title": "Smart Home & Environment",
+    "url": "/domains/#home-environment",
+    "content": "Sustainable living through environmental monitoring, green initiatives, and smart home integration.",
+    "category": "Domains",
+    "date": "2024-01-01"
+  },
+  {
+    "title": "Smart Government Services",
+    "url": "/domains/#government-services",
+    "content": "Digital-first government services enabling seamless citizen engagement and efficient public administration.",
+    "category": "Domains",
+    "date": "2024-01-01"
+  },
+  {
+    "title": "Smart Infrastructure & Utilities",
+    "url": "/domains/#infrastructure-utilities",
+    "content": "Connected infrastructure with smart grid systems, IoT sensors, and optimized utility management.",
+    "category": "Domains",
+    "date": "2024-01-01"
+  },
+  {
+    "title": "Smart Safety & Security",
+    "url": "/domains/#safety-security",
+    "content": "AI-powered surveillance, emergency response systems, and public safety innovations.",
+    "category": "Domains",
+    "date": "2024-01-01"
+  },
+  {
+    "title": "Smart Economy",
+    "url": "/domains/#smart-economy",
+    "content": "Digital economy enablement through innovation hubs, startup ecosystem, and smart business solutions.",
+    "category": "Domains",
+    "date": "2024-01-01"
+  },
+  {
+    "title": "Smart Community",
+    "url": "/domains/#smart-community",
+    "content": "Citizen-centric programs fostering digital literacy, community engagement, and inclusive development.",
+    "category": "Domains",
+    "date": "2024-01-01"
+  },
+  {
+    "title": "SDG Alignment",
+    "url": "/sdg/",
+    "content": "Smart Putrajaya initiatives aligned with the United Nations Sustainable Development Goals for sustainable cities and communities.",
+    "category": "Pages",
+    "date": "2024-01-01"
+  },
+  {
+    "title": "MS ISO 37122",
+    "url": "/ms-iso37122/",
+    "content": "Smart city indicators and certification following MS ISO 37122 international standards for sustainable communities.",
+    "category": "Pages",
+    "date": "2024-01-01"
+  },
+  {
+    "title": "Contact Us",
+    "url": "/contact/",
+    "content": "Get in touch with the Smart Putrajaya team for inquiries, partnerships, or feedback.",
+    "category": "Pages",
+    "date": "2024-01-01"
+  }
+]

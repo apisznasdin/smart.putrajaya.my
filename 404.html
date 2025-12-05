@@ -1,0 +1,65 @@
+---
+layout: default
+title: Page Not Found
+description: The page you're looking for doesn't exist. Find your way back to Smart Putrajaya.
+permalink: /404.html
+---
+
+<section class="error-page">
+    <div class="container">
+        <div class="error-content text-center">
+            <div class="error-icon">
+                <i class="fas fa-map-signs"></i>
+            </div>
+            <h1 class="error-code">404</h1>
+            <h2 class="error-title">Page Not Found</h2>
+            <p class="error-message">
+                Oops! The page you're looking for seems to have wandered off into the digital void.
+                Don't worry, even smart cities have a few unmapped areas.
+            </p>
+
+            <div class="error-search mb-4">
+                <p class="search-prompt">Try searching for what you need:</p>
+                <form class="search-form d-flex justify-content-center">
+                    <div class="input-group" style="max-width: 500px;">
+                        <input type="text" class="form-control form-control-lg" placeholder="Search Smart Putrajaya...">
+                        <button class="btn btn-hero-primary" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="error-actions">
+                <a href="{{ '/' | relative_url }}" class="btn-hero-primary">
+                    <i class="fas fa-home me-2"></i>Go to Homepage
+                </a>
+                <a href="{{ '/projects/' | relative_url }}" class="btn-hero-secondary">
+                    <i class="fas fa-project-diagram me-2"></i>View Projects
+                </a>
+            </div>
+
+            <div class="quick-links mt-5">
+                <h5>Popular Pages</h5>
+                <div class="quick-links-grid">
+                    <a href="{{ '/projects/' | relative_url }}" class="quick-link-card">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Projects</span>
+                    </a>
+                    <a href="{{ '/domains/' | relative_url }}" class="quick-link-card">
+                        <i class="fas fa-cubes"></i>
+                        <span>7 Smart Domains</span>
+                    </a>
+                    <a href="{{ '/news/' | relative_url }}" class="quick-link-card">
+                        <i class="fas fa-newspaper"></i>
+                        <span>News</span>
+                    </a>
+                    <a href="{{ '/contact/' | relative_url }}" class="quick-link-card">
+                        <i class="fas fa-envelope"></i>
+                        <span>Contact Us</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,86 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{{ page.description | default: site.description }}">
     <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
-    
+
+    <!-- SEO Tags (jekyll-seo-tag) -->
+    {% seo %}
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:title" content="{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}">
+    <meta property="og:description" content="{{ page.description | default: site.description }}">
+    <meta property="og:image" content="{{ page.image | default: '/assets/images/og-image.jpg' | absolute_url }}">
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="og:locale" content="en_MY">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ page.url | absolute_url }}">
+    <meta name="twitter:title" content="{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}">
+    <meta name="twitter:description" content="{{ page.description | default: site.description }}">
+    <meta name="twitter:image" content="{{ page.image | default: '/assets/images/og-image.jpg' | absolute_url }}">
+    <meta name="twitter:site" content="@putrajayacorp">
+
+    <!-- Additional Meta Tags -->
+    <meta name="theme-color" content="#0A2647">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Smart City Section, Perbadanan Putrajaya">
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ '/favicon.ico' | relative_url }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/images/favicon-32.png' | relative_url }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/images/favicon-16.png' | relative_url }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/images/apple-touch-icon.png' | relative_url }}">
-    
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G2XZ85B5N3"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-G2XZ85B5N3');
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "GovernmentOrganization",
+        "name": "Smart Putrajaya",
+        "alternateName": "Perbadanan Putrajaya Smart City Section",
+        "url": "{{ site.url }}",
+        "logo": "{{ '/assets/images/smartputrajaya-logo.png' | absolute_url }}",
+        "description": "{{ site.description }}",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "24 Persiaran Perdana",
+            "addressLocality": "Putrajaya",
+            "postalCode": "62675",
+            "addressCountry": "MY"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+603-8887-7000",
+            "contactType": "customer service",
+            "email": "smart@putrajaya.my"
+        },
+        "sameAs": [
+            "https://www.facebook.com/putrajaya",
+            "https://x.com/putrajayacorp",
+            "https://www.instagram.com/perbadananputrajaya",
+            "https://www.linkedin.com/company/perbadanan-putrajaya/",
+            "https://www.youtube.com/c/perbadananputrajaya/"
+        ]
+    }
     </script>
-    
-    <!-- Bootstrap 5.3 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-    <!-- Google Fonts - Professional Government Typography -->
+
+    <!-- Google tag (gtag.js) -->
+    {% if site.google_analytics %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', '{{ site.google_analytics }}');
+    </script>
+    {% endif %}
+
+    <!-- Resource Hints for Performance -->
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Google Fonts - Professional Government Typography -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
     <!-- Custom Styles -->
     <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
 </head>
+
 <body>
+    <!-- Skip to Content Link (Accessibility) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg fixed-top">
+    <nav class="navbar navbar-expand-lg fixed-top" role="navigation" aria-label="Main navigation">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="{{ '/' | relative_url }}">
-                <img src="{{ '/assets/images/smartputrajaya-logo.png' | relative_url }}" alt="Smart Putrajaya" class="navbar-logo" height="43">
+                <img src="{{ '/assets/images/smartputrajaya-logo.png' | relative_url }}" alt="Smart Putrajaya"
+                    class="navbar-logo" height="43">
             </a>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
+
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item">
                         <a class="nav-link {% if page.url == '/' %}active{% endif %}" href="{{ '/' | relative_url }}">
-                            <i class="fas fa-home me-1"></i> Home
+                            Home
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if page.url contains 'projects' %}active{% endif %}" href="{{ '/projects/' | relative_url }}">
-                            <i class="fas fa-project-diagram me-1"></i> Projects
+                        <a class="nav-link {% if page.url contains 'projects' %}active{% endif %}"
+                            href="{{ '/projects/' | relative_url }}">
+                            Projects
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if page.url contains 'domains' %}active{% endif %}" href="{{ '/domains/' | relative_url }}">
-                            <i class="fas fa-cubes me-1"></i> Domains
+                        <a class="nav-link {% if page.url contains 'domains' %}active{% endif %}"
+                            href="{{ '/domains/' | relative_url }}">
+                            Domains
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if page.url contains 'sdg' %}active{% endif %}" href="{{ '/sdg/' | relative_url }}">
-                            <i class="fas fa-globe me-1"></i> SDG
+                        <a class="nav-link {% if page.url contains 'sdg' %}active{% endif %}"
+                            href="{{ '/sdg/' | relative_url }}">
+                            SDG
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if page.url contains 'ms-iso37122' %}active{% endif %}" href="{{ '/ms-iso37122/' | relative_url }}">
-                            <i class="fas fa-certificate me-1"></i> MS ISO 37122
+                        <a class="nav-link {% if page.url contains 'ms-iso37122' %}active{% endif %}"
+                            href="{{ '/ms-iso37122/' | relative_url }}">
+                            Standards
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if page.url contains 'news' %}active{% endif %}" href="{{ '/news/' | relative_url }}">
-                            <i class="fas fa-newspaper me-1"></i> News
+                        <a class="nav-link {% if page.url contains 'news' %}active{% endif %}"
+                            href="{{ '/news/' | relative_url }}">
+                            News
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn-nav-cta ms-lg-3" href="{{ '/assets/docs/smart-putrajaya-blueprint.pdf' | relative_url }}" target="_blank">
+                        <a class="nav-link {% if page.url contains 'contact' %}active{% endif %}"
+                            href="{{ '/contact/' | relative_url }}">
+                            Contact
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link btn-search" type="button" data-bs-toggle="modal"
+                            data-bs-target="#searchModal" aria-label="Search">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link btn-theme-toggle" type="button" aria-label="Toggle dark mode"
+                            id="themeToggle">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-nav-cta ms-lg-2"
+                            href="{{ '/assets/docs/smart-putrajaya-blueprint.pdf' | relative_url }}" target="_blank"
+                            rel="noopener noreferrer">
                             <i class="fas fa-file-pdf me-1"></i> Blueprint
                         </a>
                     </li>
@@ -90,18 +195,20 @@
     </nav>
 
     <!-- Main Content -->
-    <main>
+    <main id="main-content" role="main">
         {{ content }}
     </main>
 
     <!-- Footer -->
-    <footer class="site-footer">
+    <footer class="site-footer" role="contentinfo">
         <div class="footer-wave">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" preserveAspectRatio="none">
-                <path fill="currentColor" d="M 0 56 L 48 50.7 C 96 45 192 35 288 40 C 384 45 480 67 576 72 C 672 77 768 67 864 56 C 960 45 1056 35 1152 40 C 1248 45 1344 67 1392 77.3 L 1440 88 L 1440 0 L 1392 0 C 1344 0 1248 0 1152 0 C 1056 0 960 0 864 0 C 768 0 672 0 576 0 C 480 0 384 0 288 0 C 192 0 96 0 48 0 L 0 0 Z"></path>
+                <path fill="currentColor"
+                    d="M 0 56 L 48 50.7 C 96 45 192 35 288 40 C 384 45 480 67 576 72 C 672 77 768 67 864 56 C 960 45 1056 35 1152 40 C 1248 45 1344 67 1392 77.3 L 1440 88 L 1440 0 L 1392 0 C 1344 0 1248 0 1152 0 C 1056 0 960 0 864 0 C 768 0 672 0 576 0 C 480 0 384 0 288 0 C 192 0 96 0 48 0 L 0 0 Z">
+                </path>
             </svg>
         </div>
-        
+
         <div class="footer-main">
             <div class="container">
                 <div class="row g-4">
@@ -109,38 +216,47 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="footer-brand">
                             <div class="d-flex align-items-center mb-3 gap-3">
-                                <img src="{{ '/assets/images/ppj-logo-grey.png' | relative_url }}" alt="Perbadanan Putrajaya" height="100" class="footer-logo">
-                                <img src="{{ '/assets/images/smartputrajaya-logo-white.png' | relative_url }}" alt="Smart Putrajaya" height="50" class="footer-logo">
+                                <img src="{{ '/assets/images/ppj-logo-grey.png' | relative_url }}"
+                                    alt="Perbadanan Putrajaya" height="100" class="footer-logo">
+                                <img src="{{ '/assets/images/smartputrajaya-logo-white.png' | relative_url }}"
+                                    alt="Smart Putrajaya" height="50" class="footer-logo">
                             </div>
                             <p class="footer-tagline">
                                 "Smart Urban Living for Sustainability & A Higher Quality of Life"
                             </p>
                             <div class="footer-social">
-                                <a href="https://www.facebook.com/paboranputrajaya" aria-label="Facebook" class="social-link" target="_blank">
+                                <a href="https://www.facebook.com/putrajaya" aria-label="Facebook" class="social-link"
+                                    target="_blank" rel="noopener noreferrer">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
-                                <a href="https://x.com/ppaboranputrajaya" aria-label="X" class="social-link" target="_blank">
+                                <a href="https://x.com/putrajayacorp" aria-label="X" class="social-link" target="_blank"
+                                    rel="noopener noreferrer">
                                     <i class="fab fa-x-twitter"></i>
                                 </a>
-                                <a href="https://www.instagram.com/paboranputrajaya" aria-label="Instagram" class="social-link" target="_blank">
+                                <a href="https://www.instagram.com/perbadananputrajaya" aria-label="Instagram"
+                                    class="social-link" target="_blank" rel="noopener noreferrer">
                                     <i class="fab fa-instagram"></i>
                                 </a>
-                                <a href="https://tiktok.com/@perbadananputrajaya" aria-label="TikTok" class="social-link" target="_blank">
+                                <a href="https://tiktok.com/@perbadananputrajaya" aria-label="TikTok"
+                                    class="social-link" target="_blank" rel="noopener noreferrer">
                                     <i class="fab fa-tiktok"></i>
                                 </a>
-                                <a href="https://www.youtube.com/c/perbadananputrajaya/" aria-label="YouTube" class="social-link" target="_blank">
+                                <a href="https://www.youtube.com/c/perbadananputrajaya/" aria-label="YouTube"
+                                    class="social-link" target="_blank" rel="noopener noreferrer">
                                     <i class="fab fa-youtube"></i>
                                 </a>
-                                <a href="https://www.linkedin.com/company/perbadanan-putrajaya/" aria-label="LinkedIn" class="social-link" target="_blank">
+                                <a href="https://www.linkedin.com/company/perbadanan-putrajaya/" aria-label="LinkedIn"
+                                    class="social-link" target="_blank" rel="noopener noreferrer">
                                     <i class="fab fa-linkedin-in"></i>
                                 </a>
-                                <a href="https://www.threads.com/@perbadananputrajaya" aria-label="Threads" class="social-link" target="_blank">
+                                <a href="https://www.threads.com/@perbadananputrajaya" aria-label="Threads"
+                                    class="social-link" target="_blank" rel="noopener noreferrer">
                                     <i class="fab fa-threads"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Quick Links -->
                     <div class="col-lg-2 col-md-6">
                         <h6 class="footer-heading">Quick Links</h6>
@@ -151,23 +267,31 @@
                             <li><a href="{{ '/sdg/' | relative_url }}">SDG</a></li>
                             <li><a href="{{ '/ms-iso37122/' | relative_url }}">MS ISO 37122</a></li>
                             <li><a href="{{ '/news/' | relative_url }}">News</a></li>
+                            <li><a href="{{ '/contact/' | relative_url }}">Contact</a></li>
                         </ul>
                     </div>
-                    
+
                     <!-- 7 Smart Domains -->
                     <div class="col-lg-3 col-md-6">
                         <h6 class="footer-heading">7 Smart Domains</h6>
                         <ul class="footer-links footer-domains">
-                            <li><a href="{{ '/domains/' | relative_url }}#smart-transportation"><i class="fas fa-bus me-2"></i>Transportation & Mobility</a></li>
-                            <li><a href="{{ '/domains/' | relative_url }}#home-environment"><i class="fas fa-leaf me-2"></i>Home & Environment</a></li>
-                            <li><a href="{{ '/domains/' | relative_url }}#government-services"><i class="fas fa-landmark me-2"></i>Government Services</a></li>
-                            <li><a href="{{ '/domains/' | relative_url }}#infrastructure-utilities"><i class="fas fa-network-wired me-2"></i>Infrastructure & Utilities</a></li>
-                            <li><a href="{{ '/domains/' | relative_url }}#safety-security"><i class="fas fa-shield-alt me-2"></i>Safety & Security</a></li>
-                            <li><a href="{{ '/domains/' | relative_url }}#smart-economy"><i class="fas fa-chart-line me-2"></i>Smart Economy</a></li>
-                            <li><a href="{{ '/domains/' | relative_url }}#smart-community"><i class="fas fa-users me-2"></i>Smart Community</a></li>
+                            <li><a href="{{ '/domains/' | relative_url }}#smart-transportation"><i
+                                        class="fas fa-bus me-2"></i>Transportation & Mobility</a></li>
+                            <li><a href="{{ '/domains/' | relative_url }}#home-environment"><i
+                                        class="fas fa-leaf me-2"></i>Home & Environment</a></li>
+                            <li><a href="{{ '/domains/' | relative_url }}#government-services"><i
+                                        class="fas fa-landmark me-2"></i>Government Services</a></li>
+                            <li><a href="{{ '/domains/' | relative_url }}#infrastructure-utilities"><i
+                                        class="fas fa-network-wired me-2"></i>Infrastructure & Utilities</a></li>
+                            <li><a href="{{ '/domains/' | relative_url }}#safety-security"><i
+                                        class="fas fa-shield-alt me-2"></i>Safety & Security</a></li>
+                            <li><a href="{{ '/domains/' | relative_url }}#smart-economy"><i
+                                        class="fas fa-chart-line me-2"></i>Smart Economy</a></li>
+                            <li><a href="{{ '/domains/' | relative_url }}#smart-community"><i
+                                        class="fas fa-users me-2"></i>Smart Community</a></li>
                         </ul>
                     </div>
-                    
+
                     <!-- Contact Information -->
                     <div class="col-lg-3 col-md-6">
                         <h6 class="footer-heading">Contact Us</h6>
@@ -188,14 +312,14 @@
                             </div>
                             <div class="contact-item">
                                 <i class="fas fa-envelope"></i>
-                                <a href="mailto:smart@putrajaya.my"><span class="__cf_email__" data-cfemail="bfccd2decdcbffcfcacbcdded5dec6de91d2c6">[email&#160;protected]</span></a>
+                                <a href="mailto:smart@putrajaya.my">smart@putrajaya.my</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <!-- Footer Bottom -->
         <div class="footer-bottom">
             <div class="container">
@@ -205,9 +329,11 @@
                     </div>
                     <div class="col-md-6 text-center text-md-end">
                         <p class="mb-0">
-                            <a href="https://www.ppj.gov.my/en/footer-link/dasar-privasi" target="_blank">Privacy Policy</a>
+                            <a href="https://www.ppj.gov.my/en/footer-link/dasar-privasi" target="_blank"
+                                rel="noopener noreferrer">Privacy Policy</a>
                             <span class="mx-2">|</span>
-                            <a href="https://www.ppj.gov.my/en/footer-link/terma-dan-syarat" target="_blank">Terms of Service</a>
+                            <a href="https://www.ppj.gov.my/en/footer-link/terma-dan-syarat" target="_blank"
+                                rel="noopener noreferrer">Terms of Service</a>
                         </p>
                     </div>
                 </div>
@@ -215,10 +341,34 @@
         </div>
     </footer>
 
+    <!-- Search Modal -->
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="searchModalLabel">
+                        <i class="fas fa-search me-2"></i>Search Smart Putrajaya
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="search-container">
+                        <input type="text" id="searchInput" class="form-control form-control-lg"
+                            placeholder="Type to search projects, news, domains..." autofocus>
+                    </div>
+                    <div id="searchResults" class="search-results mt-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap 5.3 JS Bundle (includes Popper) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
     <!-- Custom JavaScript -->
     <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
 </body>
+
 </html>

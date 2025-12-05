@@ -16,9 +16,9 @@ contact:
 
 # Social Links
 social:
-  facebook: "https://www.facebook.com/paboranputrajaya"
-  x: "https://x.com/ppaboranputrajaya"
-  instagram: "https://www.instagram.com/paboranputrajaya"
+  facebook: "https://www.facebook.com/putrajaya"
+  x: "https://x.com/putrajayacorp"
+  instagram: "https://www.instagram.com/perbadananputrajaya"
   tiktok: "https://tiktok.com/@perbadananputrajaya"
   youtube: "https://www.youtube.com/c/perbadananputrajaya/"
   linkedin: "https://www.linkedin.com/company/perbadanan-putrajaya/"
@@ -54,6 +54,51 @@ exclude:
   - Gemfile.lock
   - README.md
   - LICENSE
+
+# Google Analytics
+google_analytics: "G-G2XZ85B5N3"
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-minifier
+
+# Jekyll Minifier Settings
+jekyll-minifier:
+  compress_css: true
+  compress_javascript: true
+  remove_comments: true
+  preserve_php: true
+  remove_spaces_inside_tags: true
+  remove_intertag_spaces: false
+  remove_quotes: false
+  simple_doctype: false
+  remove_script_attributes: false
+  remove_style_attributes: false
+
+# SEO Settings
+logo: /assets/images/smartputrajaya-logo.png
+image: /assets/images/og-image.jpg
+twitter:
+  username: putrajayacorp
+  card: summary_large_image
+facebook:
+  publisher: https://www.facebook.com/putrajaya
+social:
+  name: Perbadanan Putrajaya
+  links:
+    - https://www.facebook.com/putrajaya
+    - https://x.com/putrajayacorp
+    - https://www.instagram.com/perbadananputrajaya
+    - https://www.linkedin.com/company/perbadanan-putrajaya/
+    - https://www.youtube.com/c/perbadananputrajaya/
+
+# Author information
+author:
+  name: Smart City Section, Perbadanan Putrajaya
+  email: smart@putrajaya.my
 
 # Environment Settings
 environment: development

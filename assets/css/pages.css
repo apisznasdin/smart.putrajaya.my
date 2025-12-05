@@ -1,0 +1,429 @@
+/* =====================================================
+   SMART PUTRAJAYA - Page-Specific Styles
+   Project, ISO 37122, SDG, Contact, 404 pages
+   ===================================================== */
+
+/* Import page styles from main stylesheet - these are page-specific overrides */
+
+/* =====================================================
+   PROJECT DETAIL PAGE
+   ===================================================== */
+.project-header {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    padding: 10rem 0 4rem;
+    position: relative;
+}
+
+.project-header-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-lg);
+}
+
+.project-content-card {
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-lg);
+    margin-top: -2rem;
+    position: relative;
+    z-index: 10;
+}
+
+/* =====================================================
+   ISO 37122 PAGE
+   ===================================================== */
+.iso-badge-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.silver-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #C0C0C0, #A8A8A8);
+    color: #333;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.25rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.badge-seal {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, #E8E8E8 0%, #C0C0C0 50%, #A8A8A8 100%);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2), inset 0 2px 10px rgba(255, 255, 255, 0.5);
+    border: 8px solid #B8B8B8;
+}
+
+/* Indicator Theme Cards */
+.indicator-theme-card {
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 1.5rem;
+}
+
+.theme-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    color: white;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.indicator-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0.75rem;
+    background: var(--color-gray-100);
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    transition: var(--transition-fast);
+}
+
+.indicator-item:hover {
+    transform: translateX(5px);
+}
+
+.indicator-code {
+    background: var(--color-primary);
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* =====================================================
+   SDG PAGE
+   ===================================================== */
+.sdg-detail-card {
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    margin-bottom: 2rem;
+}
+
+.sdg-detail-header {
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    color: var(--color-white);
+}
+
+.sdg-detail-icon {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.sdg-detail-content {
+    padding: 2rem;
+}
+
+.sdg-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.sdg-project-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-surface);
+    border-radius: var(--radius-lg);
+    transition: var(--transition-fast);
+    text-decoration: none;
+}
+
+.sdg-project-card:hover {
+    background: var(--bg-muted);
+    transform: translateX(5px);
+}
+
+.sdg-project-card .project-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.sdg-project-card .project-icon i {
+    font-size: 1.25rem;
+    color: white;
+}
+
+.sdg-project-card .project-info h5 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.sdg-project-card .project-info p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* =====================================================
+   DOMAIN DETAIL CARDS
+   ===================================================== */
+.domain-detail-card {
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    margin-bottom: 2rem;
+}
+
+.domain-detail-header {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    color: white;
+}
+
+.domain-detail-icon {
+    width: 70px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.domain-detail-icon i {
+    font-size: 2rem;
+    color: white;
+}
+
+.domain-detail-title h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.25rem;
+}
+
+.domain-detail-title p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+.domain-detail-content {
+    padding: 2rem;
+}
+
+.domain-projects {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.domain-project-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-surface);
+    border-radius: var(--radius-lg);
+    transition: var(--transition-fast);
+    text-decoration: none;
+}
+
+.domain-project-card:hover {
+    background: var(--bg-muted);
+    transform: translateX(5px);
+}
+
+.domain-project-card .project-card-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.domain-project-card .project-card-icon i {
+    font-size: 1.25rem;
+    color: white;
+}
+
+.domain-project-card .project-card-info h5 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.domain-project-card .project-card-info p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.no-projects-notice {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-tertiary);
+}
+
+.no-projects-notice i {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+/* =====================================================
+   THEME HEADER ICONS (ISO 37122)
+   ===================================================== */
+.theme-header i {
+    font-size: 1.25rem;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* =====================================================
+   CONTACT PAGE
+   ===================================================== */
+.contact-card {
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem 2rem;
+    height: 100%;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-gray-200);
+    transition: var(--transition-normal);
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.contact-card-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 1.75rem;
+    color: white;
+}
+
+/* =====================================================
+   404 ERROR PAGE
+   ===================================================== */
+.error-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 0 4rem;
+    background: linear-gradient(180deg, var(--color-light) 0%, var(--color-white) 100%);
+}
+
+.error-code {
+    font-size: 8rem;
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* =====================================================
+   DARK MODE OVERRIDES
+   ===================================================== */
+[data-theme="dark"] .domain-card,
+[data-theme="dark"] .project-card,
+[data-theme="dark"] .news-card {
+    background: #1E293B;
+    border-color: #334155;
+}
+
+[data-theme="dark"] .navbar {
+    background: rgba(15, 23, 42, 0.95);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .navbar-nav .nav-link {
+    color: #CBD5E1;
+}
+
+[data-theme="dark"] .navbar-nav .nav-link:hover {
+    color: var(--color-accent-light);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4 {
+    color: #F8FAFC;
+}
+
+[data-theme="dark"] .modal-content {
+    background: var(--bg-surface);
+    border-color: var(--border-default);
+}
+
+[data-theme="dark"] .form-control {
+    background-color: var(--bg-body);
+    border-color: var(--border-default);
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .error-page {
+    background: linear-gradient(180deg, #1E293B 0%, #0F172A 100%);
+}
+
+[data-theme="dark"] .contact-card {
+    background: #1E293B;
+    border-color: #334155;
+}
